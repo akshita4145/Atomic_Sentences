@@ -2,7 +2,7 @@
 1. **Main Clause Extraction**
    - **Trigger:** ROOT token of the sentence, which is usually a verb
    - **Action:** Extract the ROOT and its immediate subtree.  
-   - **Subjects:** `nsubj` or `nsubjpass` ** if missing, add previous subject to the beginning, which is an imperfect rule
+   - **Subjects:** nsubj or `nsubjpass` ** if missing, add previous subject to the beginning, which is an imperfect rule
    - **Objects/Complements:** `dobj`, `attr`, `xcomp` 
    - **Example Output:** `<Subj> <ROOT lemma> <Obj(s)>`
 
