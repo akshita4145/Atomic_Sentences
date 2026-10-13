@@ -1,13 +1,25 @@
-OVERVIEW
-train.csv contains the entire train csv file from wikisplit. 
-create_subset.ipynb created a subset of 200 from train.csv and stored it into train_subset.csv.
-preprocessing.ipynb then cleaned the data in train_subset.csv and stored in train_subset_cleaned.csv. 
-splitter.ipynb file uses spacy to split each sentence into tokens. The tokenized sentences are stored in tokenized_data.csv.
-Finally, sentence_extractor_v1.ipynb begins to split the tokenized data into atomic sentences. These newly formed sentences are stored in split_sentences_v1.csv.
+# Rule-Based Atomic Sentence Extraction
 
-DATA
-train.csv: contains the entire train csv file from wikisplit. 
-train_subset.csv: contains a subset of 200 random inputs from train.csv.
-train_subset_cleaned.csv: contains the cleaned, preprocessed data of train_subset.csv. 
-tokenized_data.csv contains the tokenized sentences of train_subset_cleaned.csv.
-split_sentences_v1.csv contains the atomic sentence generation based off of the tokenized_data.csv.
+Decomposes complex sentences into simple "atomic" sentences that each express a single idea, using spaCy dependency parsing and clause-type rules. Unlike LLM-based approaches, the rules are interpretable, so we can see exactly which sentence structures cause extraction to fail.
+
+📄 Paper: [Rule-Based Approaches to Atomic Sentence Extraction](https://arxiv.org/abs/2601.00506), presented at NCUR 2026
+
+## Results
+On 100 manually annotated WikiSplit sentences:
+- ROUGE-1 F1: 0.671 · ROUGE-2 F1: 0.478 · ROUGE-L F1: 0.650
+- BERTScore F1: 0.590
+
+Hardest structures: relative clauses, appositions, coordinated predicates, adverbial clauses, and passive constructions.
+
+## Pipeline
+Run the notebooks in order:
+1. `create_subset.ipynb`: samples 200 sentences from WikiSplit (`train.csv`) → `train_subset.csv`
+2. `preprocessing.ipynb`: cleans the subset → `train_subset_cleaned.csv`
+3. `splitter.ipynb`: tokenizes and parses with spaCy → `tokenized_data.csv`
+4. `sentence_extractor_v1.ipynb`: applies the extraction rules → `split_sentences_v1.csv`
+
+## Requirements
+Python 3, spaCy, pandas, Jupyter
+
+## Authors
+Lineesha Kamana, Akshita Ananda Subramanian, Mehuli Ghosh, Suman Saha (Penn State)
