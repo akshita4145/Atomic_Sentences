@@ -12,11 +12,18 @@ On 100 manually annotated WikiSplit sentences:
 Hardest structures: relative clauses, appositions, coordinated predicates, adverbial clauses, and passive constructions.
 
 ## Pipeline
-Run the notebooks in order:
-1. `create_subset.ipynb`: samples 200 sentences from WikiSplit (`train.csv`) → `train_subset.csv`
+Notebooks are in `notebooks/`; data files are in `data/`.
+1. `create_subset.ipynb`: samples 200 sentences from WikiSplit → `train_subset.csv`
 2. `preprocessing.ipynb`: cleans the subset → `train_subset_cleaned.csv`
 3. `splitter.ipynb`: tokenizes and parses with spaCy → `tokenized_data.csv`
-4. `sentence_extractor_v1.ipynb`: applies the extraction rules → `split_sentences_v1.csv`
+4. `100_best.ipynb`: selects 100 sentences for evaluation, [selection criterion]
+5. `sentence_extractor_v2.ipynb`: applies the extraction rules (see `Current_Rules.md`) → `split_sentences_v2.csv`
+6. `evaluation.ipynb`: scores output against hand-annotated `gold_standard.csv` with ROUGE and BERTScore
+
+`sentence_extractor_v1` and `v3` are earlier and experimental versions.
+
+## Requirements
+Python 3, pandas, numpy, spaCy (`python -m spacy download en_core_web_sm`), rouge-score, bert-score, Jupyter
 
 ## Requirements
 Python 3, spaCy, pandas, Jupyter
